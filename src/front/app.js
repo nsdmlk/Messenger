@@ -13,17 +13,40 @@ let currentUser = null;
 // Массив зарегистрированных пользователей
 let registeredUsers = [];
 
-// Функция для загрузки пользователей из базы данных
-function loadUsers() {
-    fetch('/api/users/all')
+// Массив чатов
+let chats = [];
+
+// Функция для загрузки чатов из базы данных
+function loadChats() {
+    fetch('/api/chats/all')
         .then(response => response.json())
-        .then(users => {
-            registeredUsers = users; // Обновляем массив зарегистрированных пользователей
-            populateUserList(); // Заполняем список пользователей
+        .then(data => {
+            chats = data; // Обновляем массив чатов
+            populateChatList(); // Заполняем список чатов
         })
         .catch(error => {
-            console.error('Ошибка при загрузке пользователей:', error);
+            console.error('Ошибка при загрузке чатов:', error);
         });
+}
+
+// Функция для заполнения списка чатов
+function populateChatList() {
+    const chatList = document.getElementById('chatList');
+    chatList.innerHTML = ''; // Очищаем текущий список
+
+    if (chats.length === 0) {
+        const noChatsMessage = document.createElement('div');
+        noChatsMessage.className = 'no-chats-message';
+        noChatsMessage.textContent = 'У вас нет чатов. Начните общаться!';
+        chatList.appendChild(noChatsMessage);
+    } else {
+        chats.forEach(chat => {
+            const chatItem = document.createElement('div');
+            chatItem.className = 'chat-item';
+            chatItem.textContent = chat.name; // Предполагается, что у чата есть поле name
+            chatList.appendChild(chatItem);
+        });
+    }
 }
 
 // Изменяем функцию showChat
@@ -33,6 +56,7 @@ function showChat() {
     updateChatHeader(); // Обновляем заголовок чата при входе
     loadMessages(); // Загружаем сообщения
     loadUsers(); // Загружаем пользователей
+    loadChats(); // Загружаем чаты
 }
 
 // Auth Logic
@@ -67,6 +91,7 @@ function handleLogin() {
 
 function handleRegister() {
     const nickname = document.querySelector('#registerForm input[type="text"]').value;
+    const email = document.querySelector('#registerForm input[type="email"]').value;
     const password = document.querySelectorAll('#registerForm input[type="password"]')[0].value;
     const confirmPassword = document.querySelectorAll('#registerForm input[type="password"]')[1].value;
     
@@ -74,16 +99,38 @@ function handleRegister() {
         showNotification('Пароли не совпадают!', 'error');
         return;
     }
-    
-    // Добавляем никнейм в массив зарегистрированных пользователей
-    registeredUsers.push(nickname);
-    
-    showNotification('Аккаунт успешно создан!');
-    setTimeout(() => {
-        showLogin();
-        document.getElementById('registerContainer').classList.add('hidden');
-        document.getElementById('loginContainer').classList.remove('hidden');
-    }, 1500);
+
+    // Создаем объект пользователя
+    const newUser = {
+        nickname: nickname,
+        email: email,
+        password: password
+    };
+
+    // Отправляем данные на сервер
+    fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser) // Отправляем объект пользователя
+    })
+    .then(response => {
+        if (response.ok) {
+            showNotification('Аккаунт успешно создан!');
+            setTimeout(() => {
+                showLogin();
+                document.getElementById('registerContainer').classList.add('hidden');
+                document.getElementById('loginContainer').classList.remove('hidden');
+            }, 1500);
+        } else {
+            showNotification('Ошибка при регистрации!', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        showNotification('Ошибка при регистрации!', 'error');
+    });
 }
 
 // Функция для обновления заголовка чата
@@ -183,7 +230,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
     chatItems.forEach(item => {
         if (item.textContent.toLowerCase().includes(searchTerm)) {
             item.style.display = 'block'; // Показываем элемент, если найден
-            found = true; // Устанавливаем флаг в true
+            found = true;
         } else {
             item.style.display = 'none'; // Скрываем элемент, если не найден
         }
