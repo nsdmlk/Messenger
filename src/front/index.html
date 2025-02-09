@@ -3,9 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messeger</title>
+    <title>Blue Messenger Pro</title>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    
+    <div id="notificationContainer"></div>
+
+    <!-- Auth Screens -->
+    <div id="authScreens">
+        <div class="auth-container" id="loginContainer">
+            <h2 class="auth-title">Вход в Blue Messenger</h2>
+            <form id="loginForm">
+                <input type="email" class="auth-input" placeholder="Email" required>
+                <input type="password" class="auth-input" placeholder="Пароль" required>
+                <button type="submit" class="auth-button">Войти</button>
+            </form>
+            <p class="auth-switch">
+                Нет аккаунта? <button onclick="showRegister()">Зарегистрируйтесь</button>
+            </p>
+        </div>
+
+        <div class="auth-container hidden" id="registerContainer">
+            <h2 class="auth-title">Регистрация</h2>
+            <form id="registerForm">
+                <input type="text" class="auth-input" placeholder="Никнейм" required>
+                <input type="email" class="auth-input" placeholder="Email" required>
+                <input type="password" class="auth-input" placeholder="Пароль" required>
+                <input type="password" class="auth-input" placeholder="Подтвердите пароль" required>
+                <button type="submit" class="auth-button">Зарегистрироваться</button>
+            </form>
+            <p class="auth-switch">
+                Уже есть аккаунт? <button onclick="showLogin()">Войти</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chatInterface" class="hidden">
+        <div class="chat-container">
+            <div class="sidebar">
+                <h2>Blue Messenger</h2>
+                <div class="chat-list" id="chatList">
+                    <!-- Здесь будут динамически добавляться чаты -->
+                    <div class="no-chats-message hidden">У вас нет чатов. Начните общаться!</div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="text" id="searchInput" placeholder="Поиск по имени..." class="auth-input" style="margin-top: 10px; flex: 1;">
+                        <button id="searchButton" class="auth-button small-button" style="margin-left: 10px;">Поиск</button>
+                    </div>
+                </div>
+                <button onclick="logout()" class="auth-button" style="margin-top: auto;">Выйти</button>
+            </div>
+            
+            <div class="chat-window">
+                <h2 id="chatHeader">Чат с: </h2>
+                <div class="messages-container" id="messagesContainer"></div>
+                <div class="input-container">
+                    <div class="message-input">
+                        <input type="text" id="messageInput" placeholder="Введите сообщение..." class="message-input-field">
+                        <button id="sendMessage" class="auth-button small-button">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
