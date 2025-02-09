@@ -72,19 +72,24 @@ body {
 }
 
 .auth-button {
-    width: 100%;
-    padding: 12px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
 
+/* Стили для маленькой кнопки */
+.small-button {
+    padding: 8px 12px; /* Меньшие отступы для маленькой кнопки */
+    font-size: 14px; /* Меньший размер шрифта */
+}
+
+/* Стили для кнопки при наведении */
 .auth-button:hover {
-    background: #1d4ed8;
+    background-color: #0056b3; /* Темнее при наведении */
 }
 
 .auth-switch {
@@ -128,17 +133,21 @@ body {
     padding: 8px;
 }
 
+/* Стили для панели поиска */
 #searchInput {
     width: 100%;
     padding: 10px;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 14px;
+    margin-top: 10px; /* Отступ сверху */
+    border: 1px solid #ccc; /* Цвет границы */
+    border-radius: 5px; /* Закругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    transition: border-color 0.3s; /* Плавный переход цвета границы */
 }
 
-#searchInput::placeholder {
-    color: rgba(255,255,255,0.7);
+/* Стили для поля ввода при фокусе */
+#searchInput:focus {
+    border-color: #007bff; /* Цвет границы при фокусе */
+    outline: none; /* Убираем стандартный контур */
 }
 
 .chat-list {
@@ -219,4 +228,82 @@ body {
 @keyframes slideIn {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+/* Стили для контейнера ввода сообщения */
+.input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc; /* Добавляем разделитель сверху */
+    background-color: #f9f9f9; /* Цвет фона */
+}
+
+/* Стили для поля ввода сообщения */
+.message-input-field {
+    flex: 1; /* Занимает все доступное пространство */
+    padding: 10px; /* Отступы внутри поля */
+    border: 1px solid #ccc; /* Цвет границы */
+    border-radius: 5px; /* Закругленные углы */
+    margin-right: 10px; /* Отступ справа */
+    font-size: 16px; /* Размер шрифта */
+    transition: border-color 0.3s; /* Плавный переход цвета границы */
+}
+
+/* Стили для поля ввода при фокусе */
+.message-input-field:focus {
+    border-color: #007bff; /* Цвет границы при фокусе */
+    outline: none; /* Убираем стандартный контур */
+}
+
+/* Дополнительные стили для улучшения внешнего вида */
+.message-input {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Занимает всю ширину */
+}
+
+.input-container {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    border-radius: 5px; /* Закругленные углы для контейнера */
+}
+
+/* Стили для заголовка чата */
+#chatHeader {
+    background-color: #2563eb; /* Цвет фона заголовка */
+    color: white; /* Цвет текста */
+    padding: 15px; /* Отступы внутри заголовка */
+    border-radius: 8px; /* Закругленные углы */
+    text-align: center; /* Центрирование текста */
+    font-size: 1.5rem; /* Размер шрифта */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для заголовка */
+    margin-bottom: 10px; /* Отступ снизу */
+}
+
+/* Стили для сообщения о том, что у пользователя нет чатов */
+.no-chats-message {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px dashed #ccc; /* Дашированная граница */
+    border-radius: 8px; /* Закругленные углы */
+    background-color: #f9f9f9; /* Цвет фона */
+}
+
+/* Стили для кнопки поиска */
+#searchButton {
+    padding: 10px 15px; /* Отступы внутри кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+/* Стили для кнопки при наведении */
+#searchButton:hover {
+    background-color: #0056b3; /* Темнее при наведении */
 }
