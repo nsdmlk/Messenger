@@ -108,29 +108,29 @@ function handleRegister() {
     };
 
     // Отправляем данные на сервер
-    fetch('/api/users/register', {
+    fetch('messenger_back/src/main/java/com/example', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser) // Отправляем объект пользователя
     })
-    .then(response => {
-        if (response.ok) {
-            showNotification('Аккаунт успешно создан!');
-            setTimeout(() => {
-                showLogin();
-                document.getElementById('registerContainer').classList.add('hidden');
-                document.getElementById('loginContainer').classList.remove('hidden');
-            }, 1500);
-        } else {
-            showNotification('Ошибка при регистрации!', 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        showNotification('Ошибка при регистрации!', 'error');
-    });
+    // .then(response => {
+    //     if (response.ok) {
+    //         showNotification('Аккаунт успешно создан!');
+    //         setTimeout(() => {
+    //             showLogin();
+    //             document.getElementById('registerContainer').classList.add('hidden');
+    //             document.getElementById('loginContainer').classList.remove('hidden');
+    //         }, 1500);
+    //     // } else {
+    //     //     showNotification('Ошибка при регистрации!', 'error');
+    //     // }
+    // })
+    // .catch(error => {
+    //     console.error('Ошибка:', error);
+    //     showNotification('Ошибка при регистрации!', 'error');
+    // });
 }
 
 // Функция для обновления заголовка чата
