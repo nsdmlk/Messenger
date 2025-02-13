@@ -1,0 +1,5 @@
+com\messenger\model\User.class
+com\messenger\controller\ApiController.class
+com\messenger\Main.class
+com\messenger\service\UserService.class
+com\messenger\repository\UserRepository.class
